@@ -55,7 +55,7 @@ function App(props) {
         message: remoteMessage.notification.body, // (required)
         playSound: true, // (optional) default: true
         soundName:
-          soundSetting[`_${remoteMessage.data.cctvId}_`] === 'mute'
+          soundSetting[`_${remoteMessage.data.CCTVId}_`] === 'mute'
             ? 'no_sound'
             : 'notif_alarm', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
 

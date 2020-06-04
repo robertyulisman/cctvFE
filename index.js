@@ -15,7 +15,7 @@ messaging().setBackgroundMessageHandler(async (remoteMessage) => {
   console.log('respon firebase background', remoteMessage);
   const soundSetting = store.getState().cameraSoundSetting;
   const soundNotif =
-    soundSetting[`_${remoteMessage.data.cctvId}_`] === 'mute'
+    soundSetting[`_${remoteMessage.data.CCTVId}_`] === 'mute'
       ? 'no_sound'
       : 'notif_alarm';
 

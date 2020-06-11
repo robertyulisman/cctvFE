@@ -80,10 +80,10 @@ export default function Notification(props) {
         setDataNotif(newData);
       })
       .catch((err) => console.log('error ganti status', err));
-  }, []);
+  }, [dataNewNotif]);
 
   const handleBackPress = () => {
-    props.navigation.goBack();
+    props.navigation.navigate('Home');
     // const params = props.route.params;
     // params.onNavigateBack();
     // console.log('params', params);
@@ -216,7 +216,7 @@ export default function Notification(props) {
                 </View>
               </TouchableOpacity>
             )}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             // extraData={selected}
           />
         ) : (

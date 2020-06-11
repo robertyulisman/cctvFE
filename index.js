@@ -9,9 +9,11 @@ import {name as appName} from './app.json';
 import messaging from '@react-native-firebase/messaging';
 import Sound from 'react-native-sound';
 import {store} from './src/store';
+import {getNewNotif} from './src/store/actions/userNotificationAction';
 
 // Register background handler
 messaging().setBackgroundMessageHandler(async (remoteMessage) => {
+  store.dispatch(getNewNotif());
   console.log('respon firebase background', remoteMessage);
   const soundSetting = store.getState().cameraSoundSetting;
   const soundNotif =

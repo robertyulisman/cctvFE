@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 export default function HistoryCard(props) {
   const navigation = useNavigation();
   const history = props.history;
+  console.log('ini historizzzzz', history.lastImage);
   return (
     <View
       style={{
@@ -16,7 +17,11 @@ export default function HistoryCard(props) {
       }}>
       <View style={{flexDirection: 'row', marginBottom: 10}}>
         <FastImage
-          source={{uri: history.lastImage}}
+          source={
+            history.lastImage !== null && history.lastImage !== ''
+              ? {uri: history.lastImage}
+              : require('../../assets/icons/camera.png')
+          }
           resizeMode="contain"
           style={{height: 50, width: 80, marginRight: 15}}
         />

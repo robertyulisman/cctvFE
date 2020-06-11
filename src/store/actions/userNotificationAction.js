@@ -7,18 +7,17 @@ export const getNewNotif = (data) => async (dispatch) => {
     if (response.data && response.data.success) {
       await dispatch({
         type: GET_NEW_NOTIFICATION,
-        // payload: response.data.data,
-        payload:
-          response.data.data && response.data.data.length > 0
-            ? response.data.data.reduce(
-                (dataHistory, newNotif) => ({
-                  ...dataHistory,
-                  [`_${newNotif.id}_`]: newNotif,
-                }),
-                {},
-              )
-            : {},
-        pagination: response.data.pagination || {},
+        payload: response.data.data,
+        //   response.data.data && response.data.data.length > 0
+        //     ? response.data.data.reduce(
+        //         (dataHistory, newNotif) => ({
+        //           ...dataHistory,
+        //           [`_${newNotif.id}_`]: newNotif,
+        //         }),
+        //         {},
+        //       )
+        //     : {},
+        // pagination: response.data.pagination || {},
       });
     }
     return response;

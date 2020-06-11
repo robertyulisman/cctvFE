@@ -20,6 +20,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import messaging from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
 import {addNavigation} from './src/store/actions/queueNavigate';
+import {getNewNotif} from './src/store/actions/userNotificationAction';
 
 function App(props) {
   console.log('propssssssss', props);
@@ -28,16 +29,9 @@ function App(props) {
   // return () => (isMountedRef.current = false);
 
   React.useEffect(() => {
-    // messaging()
-    //   .getInitialNotification()
-    //   .then((remoteMessage) => {
-    //     console.log(remoteMessage);
-    //     if (remoteMessage) {
-    //       alert('ketika inisial');
-    //     }
-    //   });
-
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      store.dispatch(getNewNotif());
+
       // handle with local notification on foreground
       const soundSetting = store.getState().cameraSoundSetting;
       console.log('respon firebase', remoteMessage);

@@ -13,7 +13,19 @@ import {useFormik} from 'formik';
 import {patchData} from '../../helpers/CRUD';
 import CustomAlert from '../../components/CustomAlert';
 import * as Yup from 'yup';
+import SystemSetting from 'react-native-system-setting';
 export default function Home(props) {
+  React.useEffect(() => {
+    SystemSetting.getVolume().then((volume) => {
+      console.log('Current volume is ' + volume);
+    });
+    soundSettings[`_${camera.id}_`] !== 'mute'
+      ? SystemSetting.setVolume(1)
+      : SystemSetting.setVolume(0);
+
+    console.log('id kamera', camera.id);
+  });
+
   const camera = props.camera;
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -24,6 +36,10 @@ export default function Home(props) {
     await dispatch(
       addCameraSetting({
         [key]: soundSettings[key] !== 'mute' ? 'mute' : 'unmute',
+        // [key]:
+        //   soundSettings[key] !== 'mute'
+        //     ? SystemSetting.setVolume(1)
+        //     : SystemSetting.setVolume(0),
       }),
     );
   };
@@ -72,7 +88,8 @@ export default function Home(props) {
     <View style={{marginVertical: 10, position: 'relative'}}>
       <FastImage
         source={
-          camera.CCTVNotifications.length > 0
+          camera.CCTVNotifications.length > 0 &&
+          camera.CCTVNotifications[0].lastImage !== null
             ? {uri: camera.CCTVNotifications[0].lastImage}
             : require('../../assets/icons/camera.png')
         }

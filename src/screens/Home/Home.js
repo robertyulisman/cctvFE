@@ -53,8 +53,9 @@ export default function Home(props) {
       await dispatch(getNewNotif());
 
       setRefreshing(false);
+      ToastAndroid.show('success update data', ToastAndroid.SHORT);
     });
-  }, [refreshing]);
+  }, []);
   const handleSearch = async (name) => {
     setSearchText(name);
     if (name.length > 3) {
@@ -130,6 +131,8 @@ export default function Home(props) {
   const [badge, setBadge] = React.useState(0);
 
   React.useEffect(() => {
+    dispatch(getUserCamera());
+    dispatch(getNewNotif());
     const jumlahUnredNotif = Object.keys(dataNewNotif.data).filter(
       (keyHistory, i) => {
         const history = dataNewNotif.data[keyHistory];
@@ -139,16 +142,7 @@ export default function Home(props) {
 
     setBadge(jumlahUnredNotif.length);
     console.log('badge', jumlahUnredNotif.length);
-    // console.log('notification', Object.keys(dataNewNotif.data));
-    dispatch(getUserCamera());
-    if (dataqueu.name) {
-      props.navigation.navigate(dataqueu.name, dataqueu.params);
-      dispatch(runNavigate());
-    }
-    return () => {
-      dispatch(runNavigate());
-    };
-  }, []);
+  }, [dataNewNotif]);
 
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
@@ -199,10 +193,10 @@ export default function Home(props) {
               style={{
                 position: 'absolute',
                 zIndex: 999,
-                top: -12,
+                top: -10,
                 right: 0,
-                height: 18,
-                width: 18,
+                height: 17,
+                width: 17,
                 padding: 5,
                 backgroundColor: 'red',
                 borderRadius: 10,
